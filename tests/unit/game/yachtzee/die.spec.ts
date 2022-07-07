@@ -32,7 +32,7 @@ test.group("Yachtzee / Die", () => {
   test("is not held on init", ({ assert }) => {
     const die = new Die();
 
-    assert.strictEqual(die.isHeld(), false);
+    assert.isFalse(die.isHeld());
   });
 
   test("can be rerolled", ({ assert, sinon }) => {
@@ -56,7 +56,7 @@ test.group("Yachtzee / Die", () => {
     const die = new Die();
     die.hold();
 
-    assert.strictEqual(die.isHeld(), true);
+    assert.isTrue(die.isHeld());
   });
 
   test("can be released", ({ assert }) => {
@@ -64,11 +64,11 @@ test.group("Yachtzee / Die", () => {
 
     die.hold();
 
-    assert.strictEqual(die.isHeld(), true);
+    assert.isTrue(die.isHeld());
 
     die.release();
 
-    assert.strictEqual(die.isHeld(), false);
+    assert.isFalse(die.isHeld());
   });
 
   test("will not roll when held", ({ assert, sinon }) => {
