@@ -13,7 +13,7 @@ test.group("Yachtzee / Die", () => {
     assert.isAtMost(die.getValue(), 6);
   });
 
-  test("value is between 1 and 6", ({ assert, sinon }) => {
+  test("rolled value is between 1 and 6", ({ assert, sinon }) => {
     const Math$random = sinon.stub(Math, "random");
 
     const die = new Die();
