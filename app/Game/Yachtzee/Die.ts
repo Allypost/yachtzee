@@ -38,4 +38,16 @@ export class Die {
 
     return this.value;
   }
+
+  public asReadonly(): this {
+    return new Proxy(this, {
+      get(target, prop) {
+        if ("roll" === prop) {
+          return () => target.value;
+        }
+
+        return target[prop];
+      },
+    });
+  }
 }

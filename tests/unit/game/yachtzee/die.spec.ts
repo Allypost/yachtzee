@@ -88,4 +88,41 @@ test.group("Yachtzee / Die", () => {
 
     assert.strictEqual(die.getValue(), initialValue);
   });
+
+  test("can be made readonly", ({ assert, sinon }) => {
+    const Math$random = sinon.stub(Math, "random");
+
+    Math$random.returns(0);
+
+    const die = new Die();
+    const readonly = die.asReadonly();
+
+    const initialValue = die.getValue();
+
+    Math$random.returns(1 - Number.EPSILON);
+
+    readonly.roll();
+
+    assert.strictEqual(die.getValue(), initialValue);
+    assert.strictEqual(readonly.getValue(), initialValue);
+    assert.strictEqual(die.getValue(), readonly.getValue());
+  });
+
+  test("readonly die mirrors original value", ({ assert }) => {
+    const die = new Die();
+    const readonly = die.asReadonly();
+
+    die.roll();
+
+    assert.strictEqual(die.getValue(), readonly.getValue());
+  });
+
+  test("readonly die mirrors original held status", ({ assert }) => {
+    const die = new Die();
+    const readonly = die.asReadonly();
+
+    die.hold();
+
+    assert.strictEqual(die.isHeld(), readonly.isHeld());
+  });
 });
