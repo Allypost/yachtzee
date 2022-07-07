@@ -6,11 +6,11 @@ import {
 } from "App/Game/Yachtzee/Die";
 
 test.group("Yachtzee / Die", () => {
-  test("has a value on init", ({ assert }) => {
+  test("does not have a value on init", ({ assert }) => {
     const die = new Die();
 
-    assert.isAtLeast(die.getValue(), 1);
-    assert.isAtMost(die.getValue(), 6);
+    assert.isFalse(die.hasValue());
+    assert.isUndefined(die.getValue());
   });
 
   test("rolled value is between 1 and 6", ({ assert, sinon }) => {

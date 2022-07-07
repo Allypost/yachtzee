@@ -8,7 +8,7 @@ export class Die {
   private value: number;
 
   constructor(value?: number) {
-    this.value = value ?? this.roll();
+    this.value = value as number;
   }
 
   public isHeld() {
@@ -21,6 +21,10 @@ export class Die {
 
   public release() {
     this.held = false;
+  }
+
+  public hasValue() {
+    return this.value !== undefined;
   }
 
   public getValue() {
