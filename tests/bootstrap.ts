@@ -34,8 +34,6 @@ declare module "@japa/runner" {
   }
 
 }
-const sinonSandbox = sinon.createSandbox();
-
 
 /*
  |--------------------------------------------------------------------------
@@ -78,11 +76,9 @@ export const reporters: Config["reporters"] = [ specReporter() ];
 export const runnerHooks: Required<Pick<Config, "setup" | "teardown">> = {
   setup: [
     () => TestUtils.ace().loadCommands(),
-    () => TestContext.getter("sinon", () => sinonSandbox, true),
+    () => TestContext.getter("sinon", () => sinon.createSandbox(), true),
   ],
-  teardown: [
-    () => sinonSandbox.restore(),
-  ],
+  teardown: [],
 };
 
 
