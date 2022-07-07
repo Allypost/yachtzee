@@ -8,6 +8,12 @@ import {
   Cup,
 } from "App/Game/Yachtzee/Cup";
 
+
+const arrayOfLength =
+  <T>(length: number, mapFn: (v: never, k: number) => T) =>
+    Array.from({ length }, mapFn)
+;
+
 test.group("Yachtzee / Cup", () => {
   test("has proper number of dice on init", ({ assert }) => {
     const cup = new Cup();
@@ -93,7 +99,9 @@ test.group("Yachtzee / Cup", () => {
 
     assert.isTrue(diceHeld().every(equals(false)));
 
-    cup.hold(Array.from({ length: Cup.N_DICE }, (_, i) => i));
+    const FULL_CUP = arrayOfLength(Cup.N_DICE, (_, i) => i);
+
+    cup.hold(FULL_CUP);
 
     assert.isTrue(diceHeld().every(equals(true)));
   });
@@ -101,7 +109,7 @@ test.group("Yachtzee / Cup", () => {
   test("can release its dice", ({ assert }) => {
     const cup = new Cup();
 
-    const FULL_CUP = Array.from({ length: Cup.N_DICE }, (_, i) => i);
+    const FULL_CUP = arrayOfLength(Cup.N_DICE, (_, i) => i);
 
     const diceHeld = () => cup.dice.map((die) => die.isHeld());
 
@@ -118,7 +126,7 @@ test.group("Yachtzee / Cup", () => {
     const cup = new Cup();
     const FIRST_HELD = 1;
     const LAST_HELD = Cup.N_DICE - 2;
-    const FULL_CUP = Array.from({ length: Cup.N_DICE }, (_, i) => i);
+    const FULL_CUP = arrayOfLength(Cup.N_DICE, (_, i) => i);
     const PARTIAL_CUP = FULL_CUP.slice(FIRST_HELD, LAST_HELD);
 
     const diceHeld = () => cup.dice.map((die) => die.isHeld());
@@ -140,7 +148,7 @@ test.group("Yachtzee / Cup", () => {
     const cup = new Cup();
     const FIRST_RELEASED = 1;
     const LAST_RELEASED = Cup.N_DICE - 2;
-    const FULL_CUP = Array.from({ length: Cup.N_DICE }, (_, i) => i);
+    const FULL_CUP = arrayOfLength(Cup.N_DICE, (_, i) => i);
     const PARTIAL_CUP = FULL_CUP.slice(FIRST_RELEASED, LAST_RELEASED);
 
     const diceHeld = () => cup.dice.map((die) => die.isHeld());

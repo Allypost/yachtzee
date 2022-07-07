@@ -28,13 +28,18 @@ const modBetween =
       )
 ;
 
+const arrayOfLength =
+  <T>(length: number, mapFn: (v: never, k: number) => T) =>
+    Array.from({ length }, mapFn)
+;
+
 const moduloDie = modBetween(1, 6);
 
 const generateRollWithNumOfValue =
   (n: number, val: number) =>
     [
-      ...Array.from({ length: n }, always(val)),
-      ...Array.from({ length: Cup.N_DICE - n }, always(moduloDie(val + 1, Cup.N_DICE + 1))),
+      ...arrayOfLength(n, always(val)),
+      ...arrayOfLength(Cup.N_DICE - n, always(moduloDie(val + 1, Cup.N_DICE + 1))),
     ]
 ;
 
@@ -222,10 +227,10 @@ test.group("Yachtzee / Scorer", () => {
     const scorer = new Scorer();
 
     const N_SCORERS = 15;
-    const SCORER_NAMES = Array.from({ length: N_SCORERS }, (_, i) => `test scorer ${ i } ${ randStr() }`);
+    const SCORER_NAMES = arrayOfLength(N_SCORERS, (_, i) => `test scorer ${ i } ${ randStr() }`);
     const PICKED_SCORER_NAMES = SCORER_NAMES.slice(1, N_SCORERS - 1);
     const NOT_PICKED_SCORER_NAMES = without(PICKED_SCORER_NAMES, SCORER_NAMES);
-    const DICE = Array.from({ length: Cup.N_DICE }, (_, i) => i + 1);
+    const DICE = arrayOfLength(Cup.N_DICE, (_, i) => i + 1);
 
     SCORER_NAMES.forEach((name, i) => {
       scorer.addScorer(name, always(i));
@@ -244,9 +249,9 @@ test.group("Yachtzee / Scorer", () => {
     const scorer = new Scorer();
 
     const N_SCORERS = Cup.N_DICE;
-    const SCORER_NAMES = Array.from({ length: N_SCORERS }, (_, i) => `test scorer ${ i } ${ randStr() }`);
+    const SCORER_NAMES = arrayOfLength(N_SCORERS, (_, i) => `test scorer ${ i } ${ randStr() }`);
     const PICKED_SCORER_NAMES = SCORER_NAMES.slice(1, N_SCORERS - 1);
-    const DICE = Array.from({ length: Cup.N_DICE }, (_, i) => i + 1);
+    const DICE = arrayOfLength(Cup.N_DICE, (_, i) => i + 1);
 
     PICKED_SCORER_NAMES.forEach((name, i) => {
       scorer.addScorer(name, (dice) => dice[i].getValue());
