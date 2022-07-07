@@ -10,7 +10,7 @@ export class Cup {
 
   public static readonly N_DICE = 5;
 
-  public readonly dice: Die[];
+  private readonly dice: Die[];
 
   private rolls = 0;
 
@@ -24,6 +24,10 @@ export class Cup {
     } else {
       this.dice = Array.from({ length: Cup.N_DICE }, () => new Die());
     }
+  }
+
+  public getDice() {
+    return this.dice.map((die) => die.asReadonly());
   }
 
   public diceValues() {

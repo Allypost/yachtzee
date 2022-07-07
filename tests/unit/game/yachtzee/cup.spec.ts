@@ -18,7 +18,7 @@ test.group("Yachtzee / Cup", () => {
   test("has proper number of dice on init", ({ assert }) => {
     const cup = new Cup();
 
-    const { dice } = cup;
+    const dice = cup.getDice();
 
     assert.strictEqual(dice.length, Cup.N_DICE);
   });
@@ -95,7 +95,7 @@ test.group("Yachtzee / Cup", () => {
   test("can hold its dice", ({ assert }) => {
     const cup = new Cup();
 
-    const diceHeld = () => cup.dice.map((die) => die.isHeld());
+    const diceHeld = () => cup.getDice().map((die) => die.isHeld());
 
     assert.isTrue(diceHeld().every(equals(false)));
 
@@ -111,7 +111,7 @@ test.group("Yachtzee / Cup", () => {
 
     const FULL_CUP = arrayOfLength(Cup.N_DICE, (_, i) => i);
 
-    const diceHeld = () => cup.dice.map((die) => die.isHeld());
+    const diceHeld = () => cup.getDice().map((die) => die.isHeld());
 
     cup.hold(FULL_CUP);
 
@@ -129,7 +129,7 @@ test.group("Yachtzee / Cup", () => {
     const FULL_CUP = arrayOfLength(Cup.N_DICE, (_, i) => i);
     const PARTIAL_CUP = FULL_CUP.slice(FIRST_HELD, LAST_HELD);
 
-    const diceHeld = () => cup.dice.map((die) => die.isHeld());
+    const diceHeld = () => cup.getDice().map((die) => die.isHeld());
 
     assert.isTrue(diceHeld().every(equals(false)));
 
@@ -151,7 +151,7 @@ test.group("Yachtzee / Cup", () => {
     const FULL_CUP = arrayOfLength(Cup.N_DICE, (_, i) => i);
     const PARTIAL_CUP = FULL_CUP.slice(FIRST_RELEASED, LAST_RELEASED);
 
-    const diceHeld = () => cup.dice.map((die) => die.isHeld());
+    const diceHeld = () => cup.getDice().map((die) => die.isHeld());
 
     cup.hold(FULL_CUP);
 
