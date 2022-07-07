@@ -64,6 +64,24 @@ export class Cup {
     }
   }
 
+  public resetRolls() {
+    this.rolls = 0;
+  }
+
+  public asNotResettable() {
+    return new Proxy(this, {
+      get(target, prop) {
+        if ("resetRolls" === prop) {
+          return () => {
+            // Do nothing
+          };
+        }
+
+        return target[prop];
+      },
+    });
+  }
+
   private canRoll() {
     return this.rolls < Cup.MAX_ROLLS;
   }

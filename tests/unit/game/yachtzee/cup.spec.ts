@@ -169,4 +169,44 @@ test.group("Yachtzee / Cup", () => {
       assert.isTrue(last.every(equals(true)));
     }
   });
+
+  test("can be reset", ({ assert }) => {
+    const cup = new Cup();
+
+    assert.strictEqual(cup.getRolls(), 0);
+    cup.roll();
+    assert.strictEqual(cup.getRolls(), 1);
+    cup.resetRolls();
+    assert.strictEqual(cup.getRolls(), 0);
+  });
+
+  test("can be made non-resettable", ({ assert }) => {
+    const nonResettableCup = new Cup().asNotResettable();
+
+    assert.strictEqual(nonResettableCup.getRolls(), 0);
+    nonResettableCup.roll();
+    assert.strictEqual(nonResettableCup.getRolls(), 1);
+    nonResettableCup.resetRolls();
+    assert.strictEqual(nonResettableCup.getRolls(), 1);
+  });
+
+  test("non-resettable cup mirrors original roll count", ({ assert }) => {
+    const cup = new Cup();
+    const nonResettableCup = cup.asNotResettable();
+
+    assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
+    cup.roll();
+    assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
+    cup.resetRolls();
+    assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
+  });
+
+  test("cup mirrors non-resettable roll count", ({ assert }) => {
+    const cup = new Cup();
+    const nonResettableCup = cup.asNotResettable();
+
+    assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
+    nonResettableCup.roll();
+    assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
+  });
 });
