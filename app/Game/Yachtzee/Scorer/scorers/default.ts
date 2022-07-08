@@ -6,21 +6,28 @@ import {
 } from "App/Game/Yachtzee/Scorer/helpers";
 import {
   groupBy,
+  mapObject,
   sum,
   values,
 } from "rambdax/immutable";
 import type {
-  ScoreFn,
+  ScoreHandler,
+  ScoreHandlers,
+} from "App/Game/Yachtzee/Scorer";
+import {
+ ScoreSection,
 } from "App/Game/Yachtzee/Scorer";
 
-export const BASE_SCORERS: Record<string, ScoreFn> = {
+const UPPER_SCORERS: Record<string, ScoreHandler> = {
   "Aces": sumDiceOfValue(1),
   "Twos": sumDiceOfValue(2),
   "Threes": sumDiceOfValue(3),
   "Fours": sumDiceOfValue(4),
   "Fives": sumDiceOfValue(5),
   "Sixes": sumDiceOfValue(6),
+};
 
+const LOWER_SCORERS: Record<string, ScoreHandler> = {
   "Three of a Kind": nOfAKind(3),
 
   "Four of a Kind": nOfAKind(4),
@@ -66,4 +73,9 @@ export const BASE_SCORERS: Record<string, ScoreFn> = {
 
     return 40;
   },
+};
+
+export const BASE_SCORERS: ScoreHandlers = {
+  ...mapObject((handler) => ({ section: "upper" as ScoreSection.upper, handler }), UPPER_SCORERS),
+  ...mapObject((handler) => ({ section: "lower" as ScoreSection.lower, handler }), LOWER_SCORERS),
 };

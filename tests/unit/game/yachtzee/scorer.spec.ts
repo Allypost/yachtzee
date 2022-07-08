@@ -3,18 +3,17 @@ import {
 } from "@japa/runner";
 import {
   Scorer,
+  ScoreSection,
 } from "App/Game/Yachtzee/Scorer";
 import {
   always,
   clamp,
   piped,
+  without,
 } from "rambdax/immutable";
 import {
   Cup,
 } from "App/Game/Yachtzee/Cup";
-import {
-  without,
-} from "rambdax";
 
 const randStr = () => Math.random().toString(36).substring(2);
 
@@ -51,7 +50,7 @@ test.group("Yachtzee / Scorer / Default / Upper", () => {
     for (let n = 0; n <= Cup.N_DICE; n++) {
       const dice = generateRollWithNumOfValue(n, val);
       const scores = scorer.score(dice);
-      assert.strictEqual(scores.Aces, val * n);
+      assert.strictEqual(scores.Aces.value, val * n);
     }
   });
 
@@ -62,7 +61,7 @@ test.group("Yachtzee / Scorer / Default / Upper", () => {
     for (let n = 0; n <= Cup.N_DICE; n++) {
       const dice = generateRollWithNumOfValue(n, val);
       const scores = scorer.score(dice);
-      assert.strictEqual(scores.Twos, val * n);
+      assert.strictEqual(scores.Twos.value, val * n);
     }
   });
 
@@ -73,7 +72,7 @@ test.group("Yachtzee / Scorer / Default / Upper", () => {
     for (let n = 0; n <= Cup.N_DICE; n++) {
       const dice = generateRollWithNumOfValue(n, val);
       const scores = scorer.score(dice);
-      assert.strictEqual(scores.Threes, val * n);
+      assert.strictEqual(scores.Threes.value, val * n);
     }
   });
 
@@ -84,7 +83,7 @@ test.group("Yachtzee / Scorer / Default / Upper", () => {
     for (let n = 0; n <= Cup.N_DICE; n++) {
       const dice = generateRollWithNumOfValue(n, val);
       const scores = scorer.score(dice);
-      assert.strictEqual(scores.Fours, val * n);
+      assert.strictEqual(scores.Fours.value, val * n);
     }
   });
 
@@ -95,7 +94,7 @@ test.group("Yachtzee / Scorer / Default / Upper", () => {
     for (let n = 0; n <= Cup.N_DICE; n++) {
       const dice = generateRollWithNumOfValue(n, val);
       const scores = scorer.score(dice);
-      assert.strictEqual(scores.Fives, val * n);
+      assert.strictEqual(scores.Fives.value, val * n);
     }
   });
 
@@ -106,7 +105,7 @@ test.group("Yachtzee / Scorer / Default / Upper", () => {
     for (let n = 0; n <= Cup.N_DICE; n++) {
       const dice = generateRollWithNumOfValue(n, val);
       const scores = scorer.score(dice);
-      assert.strictEqual(scores.Sixes, val * n);
+      assert.strictEqual(scores.Sixes.value, val * n);
     }
   });
 });
@@ -117,7 +116,7 @@ test.group("Yachtzee / Scorer / Default / Lower", () => {
 
     {
       const scores = scorer.score([ 1, 1, 1, 2, 3 ]);
-      assert.strictEqual(scores["Three of a Kind"], 8);
+      assert.strictEqual(scores["Three of a Kind"]?.value, 8);
     }
   });
 
@@ -127,7 +126,7 @@ test.group("Yachtzee / Scorer / Default / Lower", () => {
     {
       const dice = [ 1, 1, 1, 1, 3 ];
       const scores = scorer.score(dice);
-      assert.strictEqual(scores["Four of a Kind"], 7);
+      assert.strictEqual(scores["Four of a Kind"]?.value, 7);
     }
   });
 
@@ -137,7 +136,7 @@ test.group("Yachtzee / Scorer / Default / Lower", () => {
     {
       const dice = [ 1, 1, 1, 1, 1 ];
       const scores = scorer.score(dice);
-      assert.strictEqual(scores.Yahtzee, 50);
+      assert.strictEqual(scores.Yahtzee.value, 50);
     }
   });
 
@@ -147,7 +146,7 @@ test.group("Yachtzee / Scorer / Default / Lower", () => {
     {
       const dice = [ 1, 1, 1, 1, 1 ];
       const scores = scorer.score(dice);
-      assert.strictEqual(scores.Chance, 5);
+      assert.strictEqual(scores.Chance.value, 5);
     }
   });
 
@@ -157,7 +156,7 @@ test.group("Yachtzee / Scorer / Default / Lower", () => {
     {
       const dice = [ 1, 1, 1, 2, 2 ];
       const scores = scorer.score(dice);
-      assert.strictEqual(scores["Full House"], 25);
+      assert.strictEqual(scores["Full House"]?.value, 25);
     }
   });
 
@@ -167,19 +166,19 @@ test.group("Yachtzee / Scorer / Default / Lower", () => {
     {
       const dice = [ 1, 2, 3, 4, 6 ];
       const scores = scorer.score(dice);
-      assert.strictEqual(scores["Small Straight"], 30);
+      assert.strictEqual(scores["Small Straight"]?.value, 30);
     }
 
     {
       const dice = [ 2, 3, 4, 5, 1 ];
       const scores = scorer.score(dice);
-      assert.strictEqual(scores["Small Straight"], 30);
+      assert.strictEqual(scores["Small Straight"]?.value, 30);
     }
 
     {
       const dice = [ 3, 4, 5, 6, 1 ];
       const scores = scorer.score(dice);
-      assert.strictEqual(scores["Small Straight"], 30);
+      assert.strictEqual(scores["Small Straight"]?.value, 30);
     }
   });
 
@@ -189,13 +188,13 @@ test.group("Yachtzee / Scorer / Default / Lower", () => {
     {
       const dice = [ 1, 2, 3, 4, 5 ];
       const scores = scorer.score(dice);
-      assert.strictEqual(scores["Large Straight"], 40);
+      assert.strictEqual(scores["Large Straight"]?.value, 40);
     }
 
     {
       const dice = [ 2, 3, 4, 5, 6 ];
       const scores = scorer.score(dice);
-      assert.strictEqual(scores["Large Straight"], 40);
+      assert.strictEqual(scores["Large Straight"]?.value, 40);
     }
   });
 });
@@ -206,20 +205,20 @@ test.group("Yachtzee / Scorer", () => {
 
     const SCORER_NAME = `test scorer ${ Math.random().toString(36).substring(2) }`;
 
-    scorer.addScorer(SCORER_NAME, always(0));
+    scorer.addScorer(SCORER_NAME, ScoreSection.lower, always(0));
     assert.isTrue(scorer.scorerNames().includes(SCORER_NAME));
   });
 
   test("custom scorers score correctly", ({ assert }) => {
     const scorer = new Scorer();
 
-    scorer.addScorer("test sum", (dice) => dice.map((die) => die.getValue()).reduce((a, b) => a + b, 0));
-    scorer.addScorer("test 0", always(0));
+    scorer.addScorer("test sum", ScoreSection.lower, (dice) => dice.map((die) => die.getValue()).reduce((a, b) => a + b, 0));
+    scorer.addScorer("test 0", ScoreSection.lower, always(0));
 
     {
       const scores = scorer.score([ 2, 2, 2, 2, 2 ]);
-      assert.strictEqual(scores["test sum"], 10);
-      assert.strictEqual(scores["test 0"], 0);
+      assert.strictEqual(scores["test sum"]?.value, 10);
+      assert.strictEqual(scores["test 0"]?.value, 0);
     }
   });
 
@@ -233,15 +232,15 @@ test.group("Yachtzee / Scorer", () => {
     const DICE = arrayOfLength(Cup.N_DICE, (_, i) => i + 1);
 
     SCORER_NAMES.forEach((name, i) => {
-      scorer.addScorer(name, always(i));
+      scorer.addScorer(name, ScoreSection.lower, always(i));
     });
 
     const scores = scorer.scoreFor(PICKED_SCORER_NAMES, DICE);
     for (const scorerName of PICKED_SCORER_NAMES) {
-      assert.strictEqual(scores[scorerName], SCORER_NAMES.indexOf(scorerName));
+      assert.strictEqual(scores[scorerName]?.value, SCORER_NAMES.indexOf(scorerName));
     }
     for (const scorerName of NOT_PICKED_SCORER_NAMES) {
-      assert.isUndefined(scores[scorerName]);
+      assert.isUndefined(scores[scorerName]?.value);
     }
   });
 
@@ -254,13 +253,13 @@ test.group("Yachtzee / Scorer", () => {
     const DICE = arrayOfLength(Cup.N_DICE, (_, i) => i + 1);
 
     PICKED_SCORER_NAMES.forEach((name, i) => {
-      scorer.addScorer(name, (dice) => dice[i].getValue());
+      scorer.addScorer(name, ScoreSection.lower, (dice) => dice[i].getValue());
     });
 
     const scores = scorer.scoreFor(PICKED_SCORER_NAMES, DICE);
 
     PICKED_SCORER_NAMES.forEach((scorerName, i) => {
-      assert.strictEqual(scores[scorerName], DICE[i]);
+      assert.strictEqual(scores[scorerName]?.value, DICE[i]);
     });
   });
 });

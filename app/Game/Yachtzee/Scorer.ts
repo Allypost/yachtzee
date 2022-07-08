@@ -14,13 +14,20 @@ import {
   BASE_SCORERS,
 } from "App/Game/Yachtzee/Scorer/scorers/default";
 
-export type ScoreFn = (dice: readonly Die[]) => number;
+export type ScoreHandler = (dice: readonly Die[]) => number;
+
+export enum ScoreSection {
+  upper = "upper",
+  lower = "lower",
+}
+
+export type ScoreHandlers = Record<string, { section: ScoreSection, handler: ScoreHandler }>;
 
 export class Scorer {
-  private scorers: Record<string, ScoreFn> = BASE_SCORERS;
+  private scorers: ScoreHandlers = BASE_SCORERS;
 
-  public addScorer(name: string, scoreFn: ScoreFn) {
-    this.scorers[name] = scoreFn;
+  public addScorer(name: string, section: ScoreSection, handler: ScoreHandler) {
+    this.scorers[name] = { section, handler };
   }
 
   public score(dice: readonly DieLike[]) {
@@ -37,11 +44,11 @@ export class Scorer {
     return this.scoreForScorers(scorers, dice);
   }
 
-  private scoreForScorers(scorers: Record<string, ScoreFn>, dice: readonly DieLike[]) {
+  private scoreForScorers(scorers: ScoreHandlers, dice: readonly DieLike[]) {
     const entries = toPairs(scorers);
     const fixedDice = Object.freeze(toDice(dice));
-    const scores = entries.map(([ name, scoreFn ]) => [ name, scoreFn(fixedDice) ] as const);
+    const scores = entries.map(([ name, { section, handler } ]) => [ name, { section, value: handler(fixedDice) } ] as const);
 
-    return fromPairs(scores);
+    return Object.freeze(fromPairs(scores));
   }
 }
