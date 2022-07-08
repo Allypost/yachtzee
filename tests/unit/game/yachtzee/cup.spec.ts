@@ -209,4 +209,24 @@ test.group("Yachtzee / Cup", () => {
     await nonResettableCup.roll();
     assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
   });
+
+  test("event:roll is called after each roll", async ({ assert, sinon }) => {
+    const Math$random = sinon.stub(Math, "random");
+    Math$random.returns(0);
+
+    const cup = new Cup();
+
+    const initialDice = cup.diceValues();
+
+    assert.plan(1);
+
+    cup.on(
+      "roll",
+      (dice) =>
+        assert.notDeepEqual(dice.map((die) => die.getValue()), initialDice)
+      ,
+    );
+
+    await cup.roll();
+  });
 });

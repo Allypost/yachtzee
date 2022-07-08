@@ -4,8 +4,15 @@ import {
 import {
   toDie,
 } from "App/Game/Yachtzee/Scorer/helpers";
+import {
+  Eventable,
+} from "App/Meta/Eventable";
 
-export class Cup {
+type CupEvents = {
+  roll: (dice: Die[]) => void;
+};
+
+export class Cup extends Eventable<CupEvents> {
   public static readonly MAX_ROLLS = 3;
 
   public static readonly N_DICE = 5;
@@ -15,6 +22,8 @@ export class Cup {
   private rolls = 0;
 
   constructor(dice?: (Die | number)[]) {
+    super();
+
     if (dice && dice.length !== Cup.N_DICE) {
       throw new Error(`Invalid number of dice. Must be exactly ${ Cup.N_DICE }`);
     }
@@ -48,6 +57,8 @@ export class Cup {
     }
 
     this.rolls += 1;
+
+    await this.publish("roll", this.dice);
 
     return this.rolls;
   }
