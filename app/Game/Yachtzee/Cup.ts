@@ -38,7 +38,7 @@ export class Cup {
     return this.rolls;
   }
 
-  public roll() {
+  public async roll() {
     if (!this.canRoll()) {
       return this.rolls;
     }

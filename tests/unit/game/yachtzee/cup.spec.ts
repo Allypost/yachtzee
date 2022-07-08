@@ -31,37 +31,37 @@ test.group("Yachtzee / Cup", () => {
     assert.strictEqual(rolls, 0);
   });
 
-  test("can roll at least MAX_ROLLS times", ({ assert, sinon }) => {
+  test("can roll at least Cup.MAX_ROLLS times", async ({ assert, sinon }) => {
     const Math$random = sinon.stub(Math, "random");
     const cup = new Cup();
 
     let nthRoll = 0;
     for (let i = 0; i < Cup.MAX_ROLLS - 2; i++) {
-      nthRoll = cup.roll();
+      nthRoll = await cup.roll();
     }
     Math$random.returns(0);
-    cup.roll();
+    await cup.roll();
     const nextToLastValues = cup.diceValues();
 
     Math$random.returns(1 - Number.EPSILON);
-    nthRoll = cup.roll();
+    nthRoll = await cup.roll();
     const lastValues = cup.diceValues();
 
     assert.strictEqual(Cup.MAX_ROLLS, nthRoll);
     assert.notDeepEqual(nextToLastValues, lastValues);
   });
 
-  test("can roll at most MAX_ROLLS times", ({ assert, sinon }) => {
+  test("can roll at most MAX_ROLLS times", async ({ assert, sinon }) => {
     const Math$random = sinon.stub(Math, "random");
     const cup = new Cup();
 
     for (let i = 0; i < Cup.MAX_ROLLS - 1; i++) {
-      cup.roll();
+      await cup.roll();
     }
 
     Math$random.returns(0);
 
-    cup.roll();
+    await cup.roll();
 
     const maxRolledDice = cup.diceValues();
 
@@ -69,13 +69,13 @@ test.group("Yachtzee / Cup", () => {
 
     Math$random.returns(1 - Number.EPSILON);
 
-    cup.roll();
+    await cup.roll();
 
     assert.strictEqual(cup.getRolls(), Cup.MAX_ROLLS);
     assert.deepEqual(maxRolledDice, cup.diceValues());
   });
 
-  test("can re-roll dice", ({ assert, sinon }) => {
+  test("can re-roll dice", async ({ assert, sinon }) => {
     const Math$random = sinon.stub(Math, "random");
 
     Math$random.returns(0);
@@ -85,7 +85,7 @@ test.group("Yachtzee / Cup", () => {
 
     Math$random.returns(1 - Number.EPSILON);
 
-    cup.roll();
+    await cup.roll();
 
     const newDice = cup.diceValues();
 
@@ -170,43 +170,43 @@ test.group("Yachtzee / Cup", () => {
     }
   });
 
-  test("can be reset", ({ assert }) => {
+  test("can be reset", async ({ assert }) => {
     const cup = new Cup();
 
     assert.strictEqual(cup.getRolls(), 0);
-    cup.roll();
+    await cup.roll();
     assert.strictEqual(cup.getRolls(), 1);
     cup.resetRolls();
     assert.strictEqual(cup.getRolls(), 0);
   });
 
-  test("can be made non-resettable", ({ assert }) => {
+  test("can be made non-resettable", async ({ assert }) => {
     const nonResettableCup = new Cup().asNotResettable();
 
     assert.strictEqual(nonResettableCup.getRolls(), 0);
-    nonResettableCup.roll();
+    await nonResettableCup.roll();
     assert.strictEqual(nonResettableCup.getRolls(), 1);
     nonResettableCup.resetRolls();
     assert.strictEqual(nonResettableCup.getRolls(), 1);
   });
 
-  test("non-resettable cup mirrors original roll count", ({ assert }) => {
+  test("non-resettable cup mirrors original roll count", async ({ assert }) => {
     const cup = new Cup();
     const nonResettableCup = cup.asNotResettable();
 
     assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
-    cup.roll();
+    await cup.roll();
     assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
     cup.resetRolls();
     assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
   });
 
-  test("cup mirrors non-resettable roll count", ({ assert }) => {
+  test("cup mirrors non-resettable roll count", async ({ assert }) => {
     const cup = new Cup();
     const nonResettableCup = cup.asNotResettable();
 
     assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
-    nonResettableCup.roll();
+    await nonResettableCup.roll();
     assert.strictEqual(cup.getRolls(), nonResettableCup.getRolls());
   });
 });
