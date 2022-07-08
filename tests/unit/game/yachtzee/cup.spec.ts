@@ -43,7 +43,7 @@ test.group("Yachtzee / Cup", () => {
     cup.roll();
     const nextToLastValues = cup.diceValues();
 
-    Math$random.returns(1);
+    Math$random.returns(1 - Number.EPSILON);
     nthRoll = cup.roll();
     const lastValues = cup.diceValues();
 
