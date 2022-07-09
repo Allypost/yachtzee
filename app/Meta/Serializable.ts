@@ -23,8 +23,8 @@ export interface Serializable {
 
 const isSerializable =
   (obj: unknown): obj is Serializable =>
-    isType("Object", obj) &&
-    "serialize" in (obj as Record<string, unknown>)
+    isType("Object", obj)
+    && "serialize" in (obj as Record<string, unknown>)
 ;
 
 export const serialize =

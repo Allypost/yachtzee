@@ -96,6 +96,20 @@ module.exports = {
       },
     ],
     "object-shorthand": [ "error", "always" ],
+    "operator-linebreak": [
+      "error",
+      "before",
+      {
+        "overrides": {
+          "=": "after",
+          "+=": "after",
+          "-=": "after",
+          "??=": "after",
+          "&&=": "after",
+          "||=": "after",
+        },
+      },
+    ],
     "prefer-arrow-callback": "warn",
     "prefer-const": "warn",
     "prefer-destructuring": [
