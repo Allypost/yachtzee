@@ -89,7 +89,8 @@ module.exports = {
     "no-script-url": "error",
     "no-self-compare": "error",
     "no-sequences": "error",
-    "no-useless-constructor": "error",
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": [ "error" ],
     "object-curly-newline": [
       "error", {
         ImportDeclaration: "always",
