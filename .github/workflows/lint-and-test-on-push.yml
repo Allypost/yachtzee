@@ -3,13 +3,13 @@ name: Lint
 on: [ push ]
 
 jobs:
-  eslint:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: lts
           cache: yarn
-      - run: yarn install
+      - run: yarn install --frozen-lockfile --immutable
       - run: yarn lint --quiet .
