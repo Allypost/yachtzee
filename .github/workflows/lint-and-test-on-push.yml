@@ -2,6 +2,16 @@ name: Lint files and run tests
 
 on: [ push ]
 
+env:
+  PORT: 3333
+  HOST: 0.0.0.0
+  NODE_ENV: test
+  APP_KEY: app-key-random-string
+  DRIVE_DISK: local
+  SESSION_DRIVER: memory
+  CACHE_VIEWS: false
+  ASSETS_DRIVER: fake
+
 jobs:
   lint:
     runs-on: ubuntu-latest
