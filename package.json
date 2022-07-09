@@ -6,7 +6,8 @@
     "dev": "node ace serve --watch",
     "build": "node ace build --production",
     "start": "node server.js",
-    "lint": "eslint . --ext=.ts"
+    "lint": "eslint --ext='.ts,.js' --ignore-path .gitignore",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -17,6 +18,9 @@
   "eslintIgnore": [
     "build"
   ],
+  "lint-staged": {
+    "*.{js,ts}": "eslint"
+  },
   "devDependencies": {
     "@adonisjs/assembler": "^5.8.0",
     "@japa/preset-adonis": "^1.1.0",
@@ -28,6 +32,8 @@
     "eslint": "^8.19.0",
     "eslint-plugin-adonis": "^2.1.0",
     "eslint-plugin-lodash-fp": "^2.2.0-a1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "pino-pretty": "^8.1.0",
     "sinon": "^14.0.0",
     "stylelint": "^14.9.1",
