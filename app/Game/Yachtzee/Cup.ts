@@ -7,12 +7,16 @@ import {
 import {
   Eventable,
 } from "App/Meta/Eventable";
+import {
+  Serializable,
+  serialize,
+} from "App/Meta/Serializable";
 
 type CupEvents = {
   roll: (dice: Die[]) => void;
 };
 
-export class Cup extends Eventable<CupEvents> {
+export class Cup extends Eventable<CupEvents> implements Serializable {
   public static readonly MAX_ROLLS = 3;
 
   public static readonly N_DICE = 5;
@@ -90,6 +94,13 @@ export class Cup extends Eventable<CupEvents> {
 
         return target[prop];
       },
+    });
+  }
+
+  public serialize() {
+    return serialize({
+      rolls: this.rolls,
+      dice: this.dice,
     });
   }
 

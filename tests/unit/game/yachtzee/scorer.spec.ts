@@ -262,4 +262,10 @@ test.group("Yachtzee / Scorer", () => {
       assert.strictEqual(scores[scorerName]?.value, DICE[i]);
     });
   });
+
+  test("can be serialized", ({ assert }) => {
+    const scorer = new Scorer();
+
+    assert.strictEqual(scorer.serialize(), null);
+  });
 });

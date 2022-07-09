@@ -143,4 +143,15 @@ test.group("Yachtzee / Die", () => {
 
     assert.strictEqual(die.isHeld(), readonly.isHeld());
   });
+
+  test("can be serialized", ({ assert }) => {
+    const die = new Die(1);
+
+    const data = die.serialize();
+
+    assert.deepEqual(data, {
+      held: false,
+      value: 1,
+    });
+  });
 });

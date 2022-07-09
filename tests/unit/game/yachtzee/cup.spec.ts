@@ -231,4 +231,72 @@ test.group("Yachtzee / Cup", () => {
 
     await cup.roll();
   });
+
+  test("can be serialized", ({ assert, sinon }) => {
+    const Math$random = sinon.stub(Math, "random");
+
+    const cup = new Cup([
+      1,
+      2,
+      3,
+      4,
+      5,
+    ]);
+
+    assert.deepEqual(cup.serialize(), {
+      rolls: 0,
+      dice: [
+        {
+          held: false,
+          value: 1,
+        },
+        {
+          held: false,
+          value: 2,
+        },
+        {
+          held: false,
+          value: 3,
+        },
+        {
+          held: false,
+          value: 4,
+        },
+        {
+          held: false,
+          value: 5,
+        },
+      ],
+    });
+
+    Math$random.returns(0);
+
+    cup.roll();
+
+    assert.deepEqual(cup.serialize(), {
+      rolls: 1,
+      dice: [
+        {
+          held: false,
+          value: 1,
+        },
+        {
+          held: false,
+          value: 1,
+        },
+        {
+          held: false,
+          value: 1,
+        },
+        {
+          held: false,
+          value: 1,
+        },
+        {
+          held: false,
+          value: 1,
+        },
+      ],
+    });
+  });
 });

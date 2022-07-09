@@ -13,6 +13,9 @@ import {
 import {
   BASE_SCORERS,
 } from "App/Game/Yachtzee/Scorer/scorers/default";
+import {
+  Serializable,
+} from "App/Meta/Serializable";
 
 export type ScoreHandler = (dice: readonly Die[]) => number;
 
@@ -23,7 +26,7 @@ export enum ScoreSection {
 
 export type ScoreHandlers = Record<string, { section: ScoreSection, handler: ScoreHandler }>;
 
-export class Scorer {
+export class Scorer implements Serializable {
   private scorers: ScoreHandlers = BASE_SCORERS;
 
   public addScorer(name: string, section: ScoreSection, handler: ScoreHandler) {
@@ -42,6 +45,10 @@ export class Scorer {
     const scorers = pick(names, this.scorers);
 
     return this.scoreForScorers(scorers, dice);
+  }
+
+  public serialize() {
+    return null;
   }
 
   private scoreForScorers(scorers: ScoreHandlers, dice: readonly DieLike[]) {

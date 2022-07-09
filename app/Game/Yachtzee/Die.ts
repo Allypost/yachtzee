@@ -1,8 +1,12 @@
 import {
   random,
 } from "rambdax";
+import {
+  Serializable,
+  serialize,
+} from "App/Meta/Serializable";
 
-export class Die {
+export class Die implements Serializable {
   private held = false;
 
   private value: number;
@@ -44,6 +48,13 @@ export class Die {
 
         return target[prop];
       },
+    });
+  }
+
+  public serialize() {
+    return serialize({
+      held: this.held,
+      value: this.value,
     });
   }
 }
