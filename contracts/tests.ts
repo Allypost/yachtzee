@@ -6,12 +6,17 @@
  */
 
 import "@japa/runner";
+import type {
+  SinonSandbox,
+} from "sinon";
 
 declare module "@japa/runner" {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface TestContext {
-    // Extend context
+    sinon: SinonSandbox;
   }
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions,@typescript-eslint/no-empty-interface,@typescript-eslint/no-unused-vars
   interface Test<TestData> {
     // Extend test
   }
