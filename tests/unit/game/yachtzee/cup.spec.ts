@@ -227,6 +227,8 @@ test.group("Yachtzee / Cup", () => {
       ,
     );
 
+    Math$random.returns(1 - Number.EPSILON);
+
     await cup.roll();
   });
 });

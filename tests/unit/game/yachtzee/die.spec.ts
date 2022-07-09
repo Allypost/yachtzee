@@ -6,11 +6,29 @@ import {
 } from "App/Game/Yachtzee/Die";
 
 test.group("Yachtzee / Die", () => {
-  test("does not have a value on init", ({ assert }) => {
-    const die = new Die();
+  test("can be initialized with a value", ({ assert }) => {
+    assert.strictEqual(new Die(1).getValue(), 1);
+    assert.strictEqual(new Die(2).getValue(), 2);
+    assert.strictEqual(new Die(3).getValue(), 3);
+    assert.strictEqual(new Die(4).getValue(), 4);
+    assert.strictEqual(new Die(5).getValue(), 5);
+    assert.strictEqual(new Die(6).getValue(), 6);
+  });
 
-    assert.isFalse(die.hasValue());
-    assert.isUndefined(die.getValue());
+  test("has a random value on init if not explicitly provided", ({ assert, sinon }) => {
+    const Math$random = sinon.stub(Math, "random");
+
+    Math$random.returns(0);
+    assert.strictEqual(new Die().getValue(), 1);
+
+    Math$random.returns(0.5 - Number.EPSILON);
+    assert.strictEqual(new Die().getValue(), 3);
+
+    Math$random.returns(0.5);
+    assert.strictEqual(new Die().getValue(), 4);
+
+    Math$random.returns(1 - Number.EPSILON);
+    assert.strictEqual(new Die().getValue(), 6);
   });
 
   test("rolled value is between 1 and 6", ({ assert, sinon }) => {
