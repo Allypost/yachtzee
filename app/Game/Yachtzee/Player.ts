@@ -4,8 +4,10 @@ import {
 import {
   ScoreSheet,
 } from "App/Game/Yachtzee/ScoreSheet";
-import {
+import type {
   Serializable,
+} from "App/Meta/Serializable";
+import {
   serialize,
 } from "App/Meta/Serializable";
 

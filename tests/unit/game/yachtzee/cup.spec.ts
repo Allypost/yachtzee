@@ -232,7 +232,7 @@ test.group("Yachtzee / Cup", () => {
     await cup.roll();
   });
 
-  test("can be serialized", ({ assert, sinon }) => {
+  test("can be serialized", async ({ assert, sinon }) => {
     const Math$random = sinon.stub(Math, "random");
 
     const cup = new Cup([
@@ -271,7 +271,7 @@ test.group("Yachtzee / Cup", () => {
 
     Math$random.returns(0);
 
-    cup.roll();
+    await cup.roll();
 
     assert.deepEqual(cup.serialize(), {
       rolls: 1,

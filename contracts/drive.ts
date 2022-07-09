@@ -5,10 +5,10 @@
  * file.
  */
 
-import {
+import type {
  InferDisksFromConfig, 
 } from "@adonisjs/core/build/config";
-import driveConfig from "../config/drive";
+import type driveConfig from "../config/drive";
 
 declare module "@ioc:Adonis/Core/Drive" {
   type DisksList = InferDisksFromConfig<typeof driveConfig>

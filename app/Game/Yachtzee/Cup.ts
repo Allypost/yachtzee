@@ -7,8 +7,10 @@ import {
 import {
   Eventable,
 } from "App/Meta/Eventable";
-import {
+import type {
   Serializable,
+} from "App/Meta/Serializable";
+import {
   serialize,
 } from "App/Meta/Serializable";
 

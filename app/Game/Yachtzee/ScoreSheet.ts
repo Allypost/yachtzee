@@ -2,7 +2,7 @@ import {
   Scorer,
   ScoreSection,
 } from "App/Game/Yachtzee/Scorer";
-import {
+import type {
   Cup,
 } from "App/Game/Yachtzee/Cup";
 import {
@@ -20,11 +20,13 @@ import {
   toPairs,
   values,
 } from "rambdax/immutable";
-import {
+import type {
   Serializable,
-  serialize,
 } from "App/Meta/Serializable";
 import {
+  serialize,
+} from "App/Meta/Serializable";
+import type {
  DieLike,
 } from "App/Game/Yachtzee/Scorer/helpers";
 

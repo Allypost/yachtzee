@@ -31,6 +31,7 @@
     "adonis-preset-ts": "^2.1.0",
     "eslint": "^8.19.0",
     "eslint-plugin-adonis": "^2.1.0",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-lodash-fp": "^2.2.0-a1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",

@@ -1,4 +1,4 @@
-export abstract class Eventable<EventMap extends Record<string, (...args: any[]) => void>> {
+export abstract class Eventable<EventMap extends Record<string, (...args: any[]) => any>> {
   private handlers: Map<keyof EventMap, EventMap[keyof EventMap]>;
 
   protected constructor() {

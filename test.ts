@@ -12,22 +12,25 @@
 |
 */
 
-process.env.NODE_ENV = "test";
-
 import "reflect-metadata";
 import sourceMapSupport from "source-map-support";
 import {
- Ignitor, 
+ Ignitor,
 } from "@adonisjs/core/build/standalone";
-import {
- configure, processCliArgs, run, RunnerHooksHandler, 
+import type {
+ RunnerHooksHandler,
 } from "@japa/runner";
+import {
+ configure, processCliArgs, run,
+} from "@japa/runner";
+
+process.env.NODE_ENV = "test";
 
 sourceMapSupport.install({ handleUncaughtExceptions: false });
 
 const kernel = new Ignitor(__dirname).kernel("test");
 
-kernel
+void kernel
   .boot()
   .then(() => import("./tests/bootstrap"))
   .then(({ runnerHooks, ...config }) => {
@@ -45,5 +48,5 @@ kernel
       cwd: kernel.application.appRoot,
     });
 
-    run();
+    return run();
   });

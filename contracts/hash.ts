@@ -5,10 +5,10 @@
  * file.
  */
 
-import {
+import type {
  InferListFromConfig, 
 } from "@adonisjs/core/build/config";
-import hashConfig from "../config/hash";
+import type hashConfig from "../config/hash";
 
 declare module "@ioc:Adonis/Core/Hash" {
   type HashersList = InferListFromConfig<typeof hashConfig>

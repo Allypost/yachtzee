@@ -6,7 +6,7 @@
  */
 
 import Env from "@ioc:Adonis/Core/Env";
-import {
+import type {
  ShieldConfig, 
 } from "@ioc:Adonis/Addons/Shield";
 

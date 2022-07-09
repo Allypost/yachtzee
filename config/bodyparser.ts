@@ -5,7 +5,7 @@
  * file.
  */
 
-import {
+import type {
  BodyParserConfig, 
 } from "@ioc:Adonis/Core/BodyParser";
 

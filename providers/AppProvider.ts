@@ -1,4 +1,4 @@
-import {
+import type {
  ApplicationContract, 
 } from "@ioc:Adonis/Core/Application";
 

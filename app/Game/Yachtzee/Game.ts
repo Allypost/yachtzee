@@ -1,17 +1,19 @@
-import {
+import type {
   Player,
 } from "App/Game/Yachtzee/Player";
 import {
   Eventable,
 } from "App/Meta/Eventable";
-import {
+import type {
   Cup,
 } from "App/Game/Yachtzee/Cup";
-import {
+import type {
   ScoreSheet,
 } from "App/Game/Yachtzee/ScoreSheet";
-import {
+import type {
   Serializable,
+} from "App/Meta/Serializable";
+import {
   serialize,
 } from "App/Meta/Serializable";
 
