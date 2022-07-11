@@ -6,10 +6,12 @@
  */
 
 import type {
- InferListFromConfig, 
+ InferListFromConfig,
 } from "@adonisjs/core/build/config";
 import type hashConfig from "../config/hash";
 
 declare module "@ioc:Adonis/Core/Hash" {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   type HashersList = InferListFromConfig<typeof hashConfig>
 }

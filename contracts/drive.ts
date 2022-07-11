@@ -6,10 +6,12 @@
  */
 
 import type {
- InferDisksFromConfig, 
+ InferDisksFromConfig,
 } from "@adonisjs/core/build/config";
 import type driveConfig from "../config/drive";
 
 declare module "@ioc:Adonis/Core/Drive" {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   type DisksList = InferDisksFromConfig<typeof driveConfig>
 }

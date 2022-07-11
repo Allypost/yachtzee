@@ -20,5 +20,7 @@ declare module "@ioc:Adonis/Core/Env" {
 
   // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   type CustomTypes = typeof import("../env").default
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   type EnvTypes = CustomTypes
 }
