@@ -17,9 +17,6 @@ import {
   serialize,
 } from "App/Meta/Serializable";
 
-export class GameNoPlayersError extends Error {
-}
-
 type TypeOfClassMethod<T, M extends keyof T> = T[M] extends ((...args: any[]) => any) ? T[M] : never;
 type ClassMethodParams<T, M extends keyof T> = Parameters<TypeOfClassMethod<T, M>>;
 
@@ -34,6 +31,9 @@ type GameEvents = {
   "after turn": () => void,
   "action": <Action extends keyof GameActions>(player: Player, action: Action, args: GameActions[Action]) => void;
   "after action": <Action extends keyof GameActions>(player: Player, action: Action, args: GameActions[Action]) => void;
+}
+
+export class GameNoPlayersError extends Error {
 }
 
 export class GameUnknownActionError extends Error {
@@ -98,6 +98,14 @@ export class Game extends Eventable<GameEvents> implements Serializable {
     await this.publish("after action", player, action, args);
   }
 
+  public serialize() {
+    return serialize({
+      players: this.players,
+      nowPlaying: this.nowPlaying,
+      turn: this.turn,
+    });
+  }
+
   private async endPlayerTurn() {
     this.nowPlaying = (this.nowPlaying + 1) % this.players.length;
 
@@ -109,13 +117,5 @@ export class Game extends Eventable<GameEvents> implements Serializable {
   private async endTurn() {
     this.turn += 1;
     await this.publish("after turn");
-  }
-
-  public serialize() {
-    return serialize({
-      players: this.players,
-      nowPlaying: this.nowPlaying,
-      turn: this.turn,
-    });
   }
 }
