@@ -8,7 +8,7 @@
 import Env from "@ioc:Adonis/Core/Env";
 import Application from "@ioc:Adonis/Core/Application";
 import {
- sessionConfig, 
+ sessionConfig,
 } from "@adonisjs/session/build/config";
 
 export default sessionConfig({
@@ -48,7 +48,7 @@ export default sessionConfig({
   | The name of the cookie that will hold the session id.
   |
   */
-  cookieName: "adonis-session",
+  cookieName: "session",
 
   /*
   |--------------------------------------------------------------------------
