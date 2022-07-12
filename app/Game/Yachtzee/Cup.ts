@@ -83,6 +83,7 @@ export class Cup extends Eventable<CupEvents> implements Serializable {
 
   public resetRolls() {
     this.rolls = 0;
+    this.release(this.dice.map((_, i) => i));
   }
 
   public asNotResettable() {
