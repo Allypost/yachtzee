@@ -27,7 +27,7 @@ import {
   serialize,
 } from "App/Meta/Serializable";
 import type {
- DieLike,
+  DieLike,
 } from "App/Game/Yachtzee/Scorer/helpers";
 
 export class ScoreUsedError extends Error {
@@ -61,6 +61,7 @@ export class ScoreSheet extends Eventable<ScoreSheetEvents> implements Serializa
     super();
     this.scorer = scorer ?? new Scorer();
 
+    this.score(cup.getDice());
     cup.on("roll", (dice) => this.score(dice));
   }
 
