@@ -5,7 +5,6 @@ services:
     build:
       dockerfile: ./.docker/app/Dockerfile
       context: .
-      target: dependencies
     restart: always
     env_file:
       - .env
