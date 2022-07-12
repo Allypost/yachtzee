@@ -79,6 +79,18 @@ export class ScoreSheet extends Eventable<ScoreSheetEvents> implements Serializa
     return this.usedScores;
   }
 
+  public canPlay() {
+    for (const section of this.scores.keys()) {
+      for (const score of this.scores.get(section)!.keys()) {
+        if (!this.usedScores.get(section)!.has(score)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
   public getTotalScore() {
     return piped(
       Array.from(this.usedScores.entries()),
