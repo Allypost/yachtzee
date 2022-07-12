@@ -192,7 +192,7 @@ test.group("Yachtzee / Game", () => {
   });
 
   test("action:'pick score' throws if score is already picked", async ({ assert }) => {
-    const players = generatePlayers(3);
+    const players = generatePlayers(1);
     const game = new Game(players);
 
     const section = ScoreSection.upper;
