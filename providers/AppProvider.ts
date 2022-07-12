@@ -1,5 +1,5 @@
 import type {
- ApplicationContract, 
+  ApplicationContract,
 } from "@ioc:Adonis/Core/Application";
 
 export default class AppProvider {
@@ -16,6 +16,9 @@ export default class AppProvider {
 
   public async ready() {
     // App is ready
+    if ("web" === this.app.environment) {
+      await import("../start/socket");
+    }
   }
 
   public async shutdown() {

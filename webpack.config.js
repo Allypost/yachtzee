@@ -46,7 +46,7 @@ Encore.setPublicPath("/assets");
 | entrypoints.
 |
 */
-Encore.addEntry("app", "./resources/js/app.js");
+Encore.addEntry("app", "./resources/js/app.ts");
 
 /*
 |--------------------------------------------------------------------------
@@ -75,7 +75,7 @@ Encore.addEntry("app", "./resources/js/app.js");
 | https://webpack.js.org/plugins/split-chunks-plugin/
 |
 */
-// Encore.splitEntryChunks()
+Encore.splitEntryChunks();
 
 /*
 |--------------------------------------------------------------------------
@@ -157,7 +157,7 @@ Encore.configureDevServerOptions((options) => {
 | favorite CSS precompiler
 |
 */
-// Encore.enableSassLoader()
+Encore.enableSassLoader();
 // Encore.enableLessLoader()
 // Encore.enableStylusLoader()
 
@@ -187,6 +187,8 @@ Encore.configureDevServerOptions((options) => {
 //   runtimeCompilerBuild: false,
 //   useJsx: false
 // })
+
+Encore.enableTypeScriptLoader();
 
 /*
 |--------------------------------------------------------------------------

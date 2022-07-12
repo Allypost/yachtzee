@@ -1,0 +1,187 @@
+html, body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 800px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+ul {
+  margin: 0;
+}
+
+#connection-status {
+  position: fixed;
+  right: .3rem;
+  bottom: .3rem;
+  padding: .25rem;
+
+  .status-text {
+    color: #d20808;
+
+    &::before {
+      content: "Disconnected";
+    }
+
+    &.connected {
+      color: #0d800d;
+
+      &::before {
+        content: "Connected";
+      }
+    }
+  }
+}
+
+.lobby-list-item, #lobby-info {
+
+  .lobby-link {
+    &::before {
+      content: "[";
+    }
+
+    &::after {
+      content: "]";
+    }
+  }
+}
+
+#lobby-list {
+
+  .lobby-list-items {
+
+    > li:not(:first-child) {
+      margin-top: .875rem;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+    text-align: center;
+  }
+}
+
+#lobby-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  > *:last-child {
+    margin-top: auto;
+    text-align: center;
+  }
+
+  .lobby-player-list {
+    margin-bottom: .875rem;
+
+    .lobby-player-item {
+
+      &.playing {
+        list-style: disclosure-closed;
+      }
+    }
+
+    .lobby-player-item-points {
+
+      &::before {
+        content: "(";
+      }
+
+      &::after {
+        content: " points)";
+      }
+    }
+  }
+
+  .now-playing-container {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-column-gap: .5rem;
+
+    > *:nth-child(odd) {
+      text-align: right;
+    }
+
+    > *:nth-child(even) {
+      text-align: left;
+    }
+  }
+}
+
+.lobby-container {
+  display: grid;
+  align-items: flex-start;
+  justify-items: center;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  > div {
+    display: inline-flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+#game-info {
+  > *:not(:first-child) {
+    width: 100%;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid black;
+  }
+
+  .dice {
+    display: flex;
+    gap: 1rem;
+
+    .die {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      &::before {
+        font-size: 2.5rem;
+      }
+
+      &[data-value="1"]::before {
+        content: "⚀";
+      }
+
+      &[data-value="2"]::before {
+        content: "⚁";
+      }
+
+      &[data-value="3"]::before {
+        content: "⚂";
+      }
+
+      &[data-value="4"]::before {
+        content: "⚃";
+      }
+
+      &[data-value="5"]::before {
+        content: "⚄";
+      }
+
+      &[data-value="6"]::before {
+        content: "⚅";
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+  }
+}

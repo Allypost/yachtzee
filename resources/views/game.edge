@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Yahtzee</title>
+    @entryPointStyles('app')
+    @entryPointScripts('app')
+  </head>
+  <body>
+
+    <main>
+      <div id="connection-status">Status: <span class="status-text"></span></div>
+
+      <div class="lobby-container">
+        <div>
+          <h3>
+            Lobby list
+          </h3>
+          <div id="lobby-list"></div>
+        </div>
+
+        <div>
+          <h3>
+            Current lobby
+          </h3>
+          <div id="lobby-info"></div>
+        </div>
+
+        <div id="game-info" style="display: none;"></div>
+      </div>
+    </main>
+
+    <template id="template__lobby-list-item">
+      <div class="lobby-list-item">
+        <div><strong>Name</strong>: <span class="lobby-name"></span> <a href="#" class="lobby-link">Join link</a></div>
+
+        <div>
+          <strong>Players</strong>:
+          <ul class="lobby-player-list">
+            <li class="lobby-player-item">
+              <span class="lobby-player-item-name"></span>
+            </li>
+          </ul>
+        </div>
+
+        <button class="join-btn">Join</button>
+      </div>
+    </template>
+
+    <template id="template__lobby-info">
+      <div><strong>Name</strong>: <span class="lobby-name"></span> <a href="#" class="lobby-link">Join link</a></div>
+
+      <div>
+        <strong>Players</strong>:
+        <ul class="lobby-player-list">
+          <li class="lobby-player-item">
+            <span class="lobby-player-item-name"></span>
+            <button class="lobby-player-ai-remove">Remove</button>
+            <span class="lobby-player-item-points"></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="now-playing-container">
+        <strong>Now playing:</strong> <span class="now-playing-name"></span>
+        <strong>Rolls:</strong> <span><span class="now-playing-rolls"></span>/<span class="now-playing-rolls-max"></span></span>
+      </div>
+
+      <div class="lobby-actions-container">
+        <button class="add-bot-btn">Add AI player</button>
+        <button class="start-btn">Start game</button>
+        <button class="leave-btn">Leave lobby</button>
+      </div>
+    </template>
+
+    <template id="template__game-info">
+      <div class="dice">
+        <div class="die" data-value="1">
+          <button class="die-hold-btn">Hold</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="action-roll">Roll</button>
+      </div>
+
+      <table class="scores">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Score</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="score-row-container">
+          <tr class="score-row">
+            <td class="score-row-category"></td>
+            <td class="score-row-score"></td>
+            <td class="score-row-actions">
+              <button class="score-row-action-pick-btn">Pick</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </template>
+  </body>
+</html>
