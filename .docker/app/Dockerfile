@@ -6,6 +6,8 @@ COPY package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile --immutable
 
+COPY . .
+
 RUN yarn build
 
 FROM node:18-alpine as runner

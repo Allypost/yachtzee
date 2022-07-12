@@ -21,7 +21,6 @@ env:
 
 jobs:
   build:
-    needs: [ cache-deps ]
     runs-on: ubuntu-latest
     strategy:
       matrix:
