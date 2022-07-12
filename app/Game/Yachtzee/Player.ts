@@ -12,6 +12,8 @@ import {
 } from "App/Meta/Serializable";
 
 export class Player implements Serializable {
+  public readonly id = `Player-${ Date.now().toString(36) }-${ Math.random().toString(36).substring(2) }`;
+
   public readonly name: string;
 
   public readonly cup: Cup;
@@ -26,6 +28,7 @@ export class Player implements Serializable {
 
   public serialize() {
     return serialize({
+      id: this.id,
       name: this.name,
       cup: this.cup,
       scoreSheet: this.scoreSheet,
