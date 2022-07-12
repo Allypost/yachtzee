@@ -102,6 +102,7 @@ export class Cup extends Eventable<CupEvents> implements Serializable {
   public serialize() {
     return serialize({
       rolls: this.rolls,
+      maxRolls: Cup.MAX_ROLLS,
       dice: this.dice,
     });
   }

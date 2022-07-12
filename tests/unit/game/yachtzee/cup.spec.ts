@@ -245,6 +245,7 @@ test.group("Yachtzee / Cup", () => {
 
     assert.deepEqual(cup.serialize(), {
       rolls: 0,
+      maxRolls: Cup.MAX_ROLLS,
       dice: [
         {
           held: false,
@@ -275,6 +276,7 @@ test.group("Yachtzee / Cup", () => {
 
     assert.deepEqual(cup.serialize(), {
       rolls: 1,
+      maxRolls: Cup.MAX_ROLLS,
       dice: [
         {
           held: false,
