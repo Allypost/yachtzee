@@ -7,5 +7,4 @@ coverage
 tmp
 .idea
 exports
-public/assets/entrypoints.json
-public/assets/manifest.json
+public/assets
