@@ -3,17 +3,19 @@ import {
   pick,
   toPairs,
 } from "rambdax/immutable";
-import {
+import type {
   Die,
 } from "App/Game/Yachtzee/Die";
-import {
+import type {
   DieLike,
+} from "App/Game/Yachtzee/Scorer/helpers";
+import {
   toDice,
 } from "App/Game/Yachtzee/Scorer/helpers";
 import {
   BASE_SCORERS,
 } from "App/Game/Yachtzee/Scorer/scorers/default";
-import {
+import type {
   Serializable,
 } from "App/Meta/Serializable";
 

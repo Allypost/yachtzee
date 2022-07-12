@@ -20,20 +20,8 @@ import {
 } from "@japa/preset-adonis";
 import sinon from "sinon";
 import type {
-  SinonSandbox,
-} from "sinon";
-import {
   Test,
 } from "@japa/core";
-
-declare module "@japa/runner" {
-
-  // Interface must match the class name
-  interface TestContext {
-    sinon: SinonSandbox;
-  }
-
-}
 
 /*
  |--------------------------------------------------------------------------

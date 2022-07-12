@@ -2,7 +2,7 @@ import {
   Scorer,
   ScoreSection,
 } from "App/Game/Yachtzee/Scorer";
-import {
+import type {
   Cup,
 } from "App/Game/Yachtzee/Cup";
 import {
@@ -17,15 +17,16 @@ import {
   map,
   nth,
   sum,
-  toPairs,
   values,
 } from "rambdax/immutable";
-import {
+import type {
   Serializable,
-  serialize,
 } from "App/Meta/Serializable";
 import {
- DieLike,
+  serialize,
+} from "App/Meta/Serializable";
+import type {
+  DieLike,
 } from "App/Game/Yachtzee/Scorer/helpers";
 
 export class ScoreUsedError extends Error {
@@ -59,6 +60,7 @@ export class ScoreSheet extends Eventable<ScoreSheetEvents> implements Serializa
     super();
     this.scorer = scorer ?? new Scorer();
 
+    this.score(cup.getDice());
     cup.on("roll", (dice) => this.score(dice));
   }
 
@@ -66,6 +68,8 @@ export class ScoreSheet extends Eventable<ScoreSheetEvents> implements Serializa
     return serialize({
       usedScores: this.usedScores,
       scores: this.scores,
+      canPlay: this.canPlay(),
+      points: this.getTotalScore(),
     });
   }
 
@@ -77,12 +81,23 @@ export class ScoreSheet extends Eventable<ScoreSheetEvents> implements Serializa
     return this.usedScores;
   }
 
+  public canPlay() {
+    for (const section of this.scores.keys()) {
+      for (const score of this.scores.get(section)!.keys()) {
+        if (!this.usedScores.get(section)!.has(score)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
   public getTotalScore() {
     return piped(
-      this.scores,
-      toPairs,
+      Array.from(this.usedScores.entries()),
       // Sum all the scores in each section
-      map(([ section, score ]: [ string, Record<string, number> ]) => [ section, sum(values(score)) ] as const),
+      map(([ section, score ]) => [ section, sum(Array.from(score.values())) ] as const),
       // Add bonus if applicable
       map(cond([
         [ ([ section, score ]) => "upper" === section && 63 <= score, ([ _section, score ]) => score + 35 ],

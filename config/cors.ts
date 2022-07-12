@@ -5,7 +5,7 @@
  * file.
  */
 
-import {
+import type {
  CorsConfig, 
 } from "@ioc:Adonis/Core/Cors";
 

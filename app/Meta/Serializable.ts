@@ -1,7 +1,7 @@
 import {
   isType,
 } from "rambdax/immutable";
-import {
+import type {
   Primitive,
 } from "type-fest";
 
@@ -17,7 +17,7 @@ type Serialized<T> =
           : { [K in keyof T]: Serialized<T[K]> }
   ;
 
-export interface Serializable {
+export type Serializable = {
   serialize();
 }
 

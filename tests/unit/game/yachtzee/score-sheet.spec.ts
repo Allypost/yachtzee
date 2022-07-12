@@ -23,14 +23,15 @@ test.group("Yachtzee / ScoreSheet", () => {
     }
   });
 
-  test("scores are empty on init", ({ assert }) => {
+  test("scores are scored on init", ({ assert }) => {
     const cup = new Cup();
     const scoreSheet = new ScoreSheet(cup);
 
     const scores = scoreSheet.getScores();
 
     for (const section of Object.values(ScoreSection)) {
-      assert.deepEqual(Array.from(scores.get(section)!.values()), []);
+      const sectionScores = Array.from(scores.get(section)!.values());
+      assert.isAtLeast(sectionScores.length, 1);
     }
   });
 });

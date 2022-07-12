@@ -1,0 +1,50 @@
+name: Lint files and run tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+  push:
+    branches:
+      - main
+      - develop
+
+env:
+  PORT: 3333
+  HOST: 0.0.0.0
+  NODE_ENV: test
+  APP_KEY: app-key-random-string
+  DRIVE_DISK: local
+  SESSION_DRIVER: memory
+  CACHE_VIEWS: false
+  ASSETS_DRIVER: fake
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          cache: yarn
+      - run: yarn install --frozen-lockfile --immutable
+      - run: yarn lint --quiet .
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ lts/*, latest ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          check-latest: true
+      - run: yarn install --frozen-lockfile --immutable
+      - run: yarn test

@@ -180,6 +180,22 @@ test.group("Yachtzee / Cup", () => {
     assert.strictEqual(cup.getRolls(), 0);
   });
 
+  test("reset also releases all dice", ({ assert }) => {
+    const cup = new Cup(arrayOfLength(Cup.N_DICE, (_, i) => i + 1));
+    const dice = cup.getDice();
+    const heldDice = dice.slice(1, Cup.N_DICE - 1);
+
+    for (const die of heldDice) {
+      die.hold();
+    }
+
+    cup.resetRolls();
+
+    for (const die of heldDice) {
+      assert.isFalse(die.isHeld());
+    }
+  });
+
   test("can be made non-resettable", async ({ assert }) => {
     const nonResettableCup = new Cup().asNotResettable();
 
@@ -232,7 +248,7 @@ test.group("Yachtzee / Cup", () => {
     await cup.roll();
   });
 
-  test("can be serialized", ({ assert, sinon }) => {
+  test("can be serialized", async ({ assert, sinon }) => {
     const Math$random = sinon.stub(Math, "random");
 
     const cup = new Cup([
@@ -245,6 +261,7 @@ test.group("Yachtzee / Cup", () => {
 
     assert.deepEqual(cup.serialize(), {
       rolls: 0,
+      maxRolls: Cup.MAX_ROLLS,
       dice: [
         {
           held: false,
@@ -271,10 +288,11 @@ test.group("Yachtzee / Cup", () => {
 
     Math$random.returns(0);
 
-    cup.roll();
+    await cup.roll();
 
     assert.deepEqual(cup.serialize(), {
       rolls: 1,
+      maxRolls: Cup.MAX_ROLLS,
       dice: [
         {
           held: false,

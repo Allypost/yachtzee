@@ -8,16 +8,41 @@ module.exports = {
   parserOptions: {
     parser: "@typescript-eslint/parser",
     requireConfigFile: false,
+    tsconfigRootDir: __dirname,
+    project: [ "./tsconfig.json" ],
   },
   plugins: [
     "lodash-fp",
   ],
   extends: [
     "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/strict",
     "plugin:lodash-fp/recommended",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
   ],
   // add your custom rules here
   rules: {
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "prefer": "type-imports",
+      },
+    ],
+    "@typescript-eslint/consistent-type-definitions": [
+      "error",
+      "type",
+    ],
+
+    "import/first": [ "error" ],
+    "import/exports-last": [ "warn" ],
+    "import/order": [ "error" ],
+
     "no-lone-blocks": "off",
     "no-redeclare": "off",
     "@typescript-eslint/no-redeclare": [ "error" ],
@@ -89,7 +114,8 @@ module.exports = {
     "no-script-url": "error",
     "no-self-compare": "error",
     "no-sequences": "error",
-    "no-useless-constructor": "error",
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": [ "error" ],
     "object-curly-newline": [
       "error", {
         ImportDeclaration: "always",

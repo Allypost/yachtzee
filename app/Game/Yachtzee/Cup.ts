@@ -7,8 +7,10 @@ import {
 import {
   Eventable,
 } from "App/Meta/Eventable";
-import {
+import type {
   Serializable,
+} from "App/Meta/Serializable";
+import {
   serialize,
 } from "App/Meta/Serializable";
 
@@ -81,6 +83,7 @@ export class Cup extends Eventable<CupEvents> implements Serializable {
 
   public resetRolls() {
     this.rolls = 0;
+    this.release(this.dice.map((_, i) => i));
   }
 
   public asNotResettable() {
@@ -100,6 +103,7 @@ export class Cup extends Eventable<CupEvents> implements Serializable {
   public serialize() {
     return serialize({
       rolls: this.rolls,
+      maxRolls: Cup.MAX_ROLLS,
       dice: this.dice,
     });
   }

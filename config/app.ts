@@ -8,19 +8,19 @@
 import proxyAddr from "proxy-addr";
 import Env from "@ioc:Adonis/Core/Env";
 import Application from "@ioc:Adonis/Core/Application";
-import {
+import type {
  ServerConfig, 
 } from "@ioc:Adonis/Core/Server";
-import {
+import type {
  LoggerConfig, 
 } from "@ioc:Adonis/Core/Logger";
-import {
+import type {
  ProfilerConfig, 
 } from "@ioc:Adonis/Core/Profiler";
-import {
+import type {
  ValidatorConfig, 
 } from "@ioc:Adonis/Core/Validator";
-import {
+import type {
  AssetsManagerConfig, 
 } from "@ioc:Adonis/Core/AssetsManager";
 

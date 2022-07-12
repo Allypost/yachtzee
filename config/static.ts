@@ -5,7 +5,7 @@
  * file.
  */
 
-import {
+import type {
  AssetsConfig, 
 } from "@ioc:Adonis/Core/Static";
 

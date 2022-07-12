@@ -1,7 +1,8 @@
 {
   "extends": "adonis-preset-ts/tsconfig.json",
   "include": [
-    "**/*"
+    "**/*",
+    ".eslintrc.js"
   ],
   "exclude": [
     "node_modules",
@@ -13,6 +14,9 @@
     "outDir": "build",
     "rootDir": "./",
     "sourceMap": true,
+    "allowJs": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "App/*": [
         "./app/*"
@@ -34,6 +38,10 @@
       "@adonisjs/view",
       "@adonisjs/shield",
       "@japa/preset-adonis/build/adonis-typings"
+    ],
+    "lib": [
+      "ES2020",
+      "dom"
     ]
   }
 }

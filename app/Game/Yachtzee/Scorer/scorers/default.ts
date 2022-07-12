@@ -14,7 +14,7 @@ import type {
   ScoreHandler,
   ScoreHandlers,
 } from "App/Game/Yachtzee/Scorer";
-import {
+import type {
  ScoreSection,
 } from "App/Game/Yachtzee/Scorer";
 

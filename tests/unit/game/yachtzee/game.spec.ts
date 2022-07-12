@@ -158,13 +158,6 @@ test.group("Yachtzee / Game", () => {
     assert.isFalse(currentPlayerDice[dieIndex].isHeld());
   });
 
-  test("action:'pick score' throws if the dice haven't been rolled beforehand", async ({ assert }) => {
-    const players = generatePlayers(3);
-    const game = new Game(players);
-
-    await assert.rejects(async () => await game.do("pick score", ScoreSection.upper, "Aces"));
-  });
-
   test("action:'pick score' ends players turn", async ({ assert }) => {
     const players = generatePlayers(3);
     const game = new Game(players);
@@ -192,7 +185,7 @@ test.group("Yachtzee / Game", () => {
   });
 
   test("action:'pick score' throws if score is already picked", async ({ assert }) => {
-    const players = generatePlayers(3);
+    const players = generatePlayers(1);
     const game = new Game(players);
 
     const section = ScoreSection.upper;
