@@ -27,7 +27,7 @@ export class Player implements Serializable {
   public serialize() {
     return serialize({
       name: this.name,
-      cup: this.cup.serialize(),
+      cup: this.cup,
       scoreSheet: this.scoreSheet,
     });
   }
