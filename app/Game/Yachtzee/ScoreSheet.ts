@@ -17,7 +17,6 @@ import {
   map,
   nth,
   sum,
-  toPairs,
   values,
 } from "rambdax/immutable";
 import type {
@@ -82,10 +81,9 @@ export class ScoreSheet extends Eventable<ScoreSheetEvents> implements Serializa
 
   public getTotalScore() {
     return piped(
-      this.scores,
-      toPairs,
+      Array.from(this.usedScores.entries()),
       // Sum all the scores in each section
-      map(([ section, score ]: [ string, Record<string, number> ]) => [ section, sum(values(score)) ] as const),
+      map(([ section, score ]) => [ section, sum(Array.from(score.values())) ] as const),
       // Add bonus if applicable
       map(cond([
         [ ([ section, score ]) => "upper" === section && 63 <= score, ([ _section, score ]) => score + 35 ],
