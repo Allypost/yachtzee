@@ -10,19 +10,19 @@ import type {
   ClientToServerEvents,
   LobbyInfo,
   ServerToClientEvents,
-} from "App/Game/Yachtzee/Server/Socket";
+} from "App/Game/Yahtzee/Server/Socket";
 import type {
   LobbyName,
-} from "App/Game/Yachtzee/Lobby";
+} from "App/Game/Yahtzee/Lobby";
 import type {
   Die as TDie,
-} from "App/Game/Yachtzee/Die";
+} from "App/Game/Yahtzee/Die";
 import {
   toPairs,
 } from "rambdax/immutable";
 import type {
   ScoreSection,
-} from "App/Game/Yachtzee/Scorer";
+} from "App/Game/Yahtzee/Scorer";
 
 type Maybe<T> = T | null | undefined;
 type Player = LobbyInfo["clients"][0];

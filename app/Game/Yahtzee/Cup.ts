@@ -1,9 +1,9 @@
 import {
   Die,
-} from "App/Game/Yachtzee/Die";
+} from "App/Game/Yahtzee/Die";
 import {
   toDie,
-} from "App/Game/Yachtzee/Scorer/helpers";
+} from "App/Game/Yahtzee/Scorer/helpers";
 import {
   Eventable,
 } from "App/Meta/Eventable";

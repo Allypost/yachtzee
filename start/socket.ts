@@ -15,21 +15,21 @@ import {
 import type {
   LobbyId,
   LobbyName,
-} from "App/Game/Yachtzee/Lobby";
+} from "App/Game/Yahtzee/Lobby";
 import {
   AiPlayer,
   Lobby,
-} from "App/Game/Yachtzee/Lobby";
+} from "App/Game/Yahtzee/Lobby";
 import type {
   ClientToServerEvents,
   InterServerEvents,
   LobbyInfo,
   ServerToClientEvents,
   SocketData,
-} from "App/Game/Yachtzee/Server/Socket";
+} from "App/Game/Yahtzee/Server/Socket";
 import type {
   GameActions,
-} from "App/Game/Yachtzee/Game";
+} from "App/Game/Yahtzee/Game";
 import {
   JsonFileExporter,
 } from "App/Exporters/JsonFileExporter";

@@ -6,7 +6,7 @@ import {
 } from "rambdax";
 import {
   Cup,
-} from "App/Game/Yachtzee/Cup";
+} from "App/Game/Yahtzee/Cup";
 
 
 const arrayOfLength =
@@ -14,7 +14,7 @@ const arrayOfLength =
     Array.from({ length }, mapFn)
 ;
 
-test.group("Yachtzee / Cup", () => {
+test.group("Yahtzee / Cup", () => {
   test("has proper number of dice on init", ({ assert }) => {
     const cup = new Cup();
 

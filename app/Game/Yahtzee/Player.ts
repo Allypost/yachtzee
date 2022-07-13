@@ -1,9 +1,9 @@
 import {
   Cup,
-} from "App/Game/Yachtzee/Cup";
+} from "App/Game/Yahtzee/Cup";
 import {
   ScoreSheet,
-} from "App/Game/Yachtzee/ScoreSheet";
+} from "App/Game/Yahtzee/ScoreSheet";
 import type {
   Serializable,
 } from "App/Meta/Serializable";

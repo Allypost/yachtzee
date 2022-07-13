@@ -3,16 +3,16 @@ import {
 } from "@japa/runner";
 import {
   Player,
-} from "App/Game/Yachtzee/Player";
+} from "App/Game/Yahtzee/Player";
 import {
   Cup,
-} from "App/Game/Yachtzee/Cup";
+} from "App/Game/Yahtzee/Cup";
 import {
   Game,
-} from "App/Game/Yachtzee/Game";
+} from "App/Game/Yahtzee/Game";
 import {
   ScoreSection,
-} from "App/Game/Yachtzee/Scorer";
+} from "App/Game/Yahtzee/Scorer";
 
 type NonEmptyArray<T> = [ T, ...T[] ];
 
@@ -51,7 +51,7 @@ const generatePlayers =
  console.log(game.getPlayers().map((p) => [ p.name, p.scoreSheet.getTotalScore() ]));
  */
 
-test.group("Yachtzee / Game", () => {
+test.group("Yahtzee / Game", () => {
   test("throws error when no players are provided", ({ assert }) => {
     const players = [] as Player[];
     assert.throws(() => new Game(players));

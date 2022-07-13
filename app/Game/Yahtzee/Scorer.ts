@@ -5,16 +5,16 @@ import {
 } from "rambdax/immutable";
 import type {
   Die,
-} from "App/Game/Yachtzee/Die";
+} from "App/Game/Yahtzee/Die";
 import type {
   DieLike,
-} from "App/Game/Yachtzee/Scorer/helpers";
+} from "App/Game/Yahtzee/Scorer/helpers";
 import {
   toDice,
-} from "App/Game/Yachtzee/Scorer/helpers";
+} from "App/Game/Yahtzee/Scorer/helpers";
 import {
   BASE_SCORERS,
-} from "App/Game/Yachtzee/Scorer/scorers/default";
+} from "App/Game/Yahtzee/Scorer/scorers/default";
 import type {
   Serializable,
 } from "App/Meta/Serializable";

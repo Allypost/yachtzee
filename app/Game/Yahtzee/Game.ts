@@ -1,15 +1,15 @@
 import type {
   Player,
-} from "App/Game/Yachtzee/Player";
+} from "App/Game/Yahtzee/Player";
 import {
   Eventable,
 } from "App/Meta/Eventable";
 import type {
   Cup,
-} from "App/Game/Yachtzee/Cup";
+} from "App/Game/Yahtzee/Cup";
 import type {
   ScoreSheet,
-} from "App/Game/Yachtzee/ScoreSheet";
+} from "App/Game/Yahtzee/ScoreSheet";
 import type {
   Serializable,
 } from "App/Meta/Serializable";

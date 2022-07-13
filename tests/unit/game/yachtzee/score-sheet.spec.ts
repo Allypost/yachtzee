@@ -3,15 +3,15 @@ import {
 } from "@japa/runner";
 import {
   ScoreSheet,
-} from "App/Game/Yachtzee/ScoreSheet";
+} from "App/Game/Yahtzee/ScoreSheet";
 import {
   Cup,
-} from "App/Game/Yachtzee/Cup";
+} from "App/Game/Yahtzee/Cup";
 import {
   ScoreSection,
-} from "App/Game/Yachtzee/Scorer";
+} from "App/Game/Yahtzee/Scorer";
 
-test.group("Yachtzee / ScoreSheet", () => {
+test.group("Yahtzee / ScoreSheet", () => {
   test("scores are divided into sections on init", ({ assert }) => {
     const cup = new Cup();
     const scoreSheet = new ScoreSheet(cup);

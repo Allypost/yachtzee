@@ -6,10 +6,10 @@ import {
 } from "App/Meta/Serializable";
 import {
   Player,
-} from "App/Game/Yachtzee/Player";
+} from "App/Game/Yahtzee/Player";
 import {
   Game,
-} from "App/Game/Yachtzee/Game";
+} from "App/Game/Yahtzee/Game";
 import type {
   Opaque,
 } from "type-fest";
@@ -27,7 +27,7 @@ import {
 } from "rambdax";
 import type {
   ScoreSection,
-} from "App/Game/Yachtzee/Scorer";
+} from "App/Game/Yahtzee/Scorer";
 
 const randomString = (prefix: string) => `${ prefix }${ Date.now().toString(36) }-${ Math.random().toString(36).substring(2) }`;
 
