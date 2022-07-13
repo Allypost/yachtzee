@@ -3,9 +3,9 @@ import {
 } from "@japa/runner";
 import {
   Die,
-} from "App/Game/Yachtzee/Die";
+} from "App/Game/Yahtzee/Die";
 
-test.group("Yachtzee / Die", () => {
+test.group("Yahtzee / Die", () => {
   test("can be initialized with a value", ({ assert }) => {
     assert.strictEqual(new Die(1).getValue(), 1);
     assert.strictEqual(new Die(2).getValue(), 2);

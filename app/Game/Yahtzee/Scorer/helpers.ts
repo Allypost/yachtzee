@@ -1,6 +1,6 @@
 import {
   Die,
-} from "App/Game/Yachtzee/Die";
+} from "App/Game/Yahtzee/Die";
 import {
   any,
   equals,

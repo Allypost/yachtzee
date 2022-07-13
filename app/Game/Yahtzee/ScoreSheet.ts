@@ -1,10 +1,10 @@
 import {
   Scorer,
   ScoreSection,
-} from "App/Game/Yachtzee/Scorer";
+} from "App/Game/Yahtzee/Scorer";
 import type {
   Cup,
-} from "App/Game/Yachtzee/Cup";
+} from "App/Game/Yahtzee/Cup";
 import {
   Eventable,
 } from "App/Meta/Eventable";
@@ -27,7 +27,7 @@ import {
 } from "App/Meta/Serializable";
 import type {
   DieLike,
-} from "App/Game/Yachtzee/Scorer/helpers";
+} from "App/Game/Yahtzee/Scorer/helpers";
 
 export class ScoreUsedError extends Error {
 }

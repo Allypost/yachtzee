@@ -2,10 +2,10 @@ import type {
   Lobby,
   LobbyId,
   LobbyName,
-} from "App/Game/Yachtzee/Lobby";
+} from "App/Game/Yahtzee/Lobby";
 import type {
   GameActions,
-} from "App/Game/Yachtzee/Game";
+} from "App/Game/Yahtzee/Game";
 
 type Maybe<T> = T | null | undefined;
 

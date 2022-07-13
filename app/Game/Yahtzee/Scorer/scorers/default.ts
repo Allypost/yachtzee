@@ -3,7 +3,7 @@ import {
   hasNConsecutiveValues,
   nOfAKind,
   sumDiceOfValue,
-} from "App/Game/Yachtzee/Scorer/helpers";
+} from "App/Game/Yahtzee/Scorer/helpers";
 import {
   groupBy,
   mapObject,
@@ -13,10 +13,8 @@ import {
 import type {
   ScoreHandler,
   ScoreHandlers,
-} from "App/Game/Yachtzee/Scorer";
-import type {
- ScoreSection,
-} from "App/Game/Yachtzee/Scorer";
+  ScoreSection,
+} from "App/Game/Yahtzee/Scorer";
 
 const UPPER_SCORERS: Record<string, ScoreHandler> = {
   "Aces": sumDiceOfValue(1),

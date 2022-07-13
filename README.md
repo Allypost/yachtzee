@@ -1,3 +1,3 @@
-# Yachtzee (Jamb)
+# Yahtzee (Jamb)
 
 
