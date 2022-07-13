@@ -240,7 +240,7 @@ test.group("Yahtzee / Scorer", () => {
       assert.strictEqual(scores[scorerName].value, SCORER_NAMES.indexOf(scorerName));
     }
     for (const scorerName of NOT_PICKED_SCORER_NAMES) {
-      assert.isUndefined(scores[scorerName].value);
+      assert.isUndefined(scores[scorerName]);
     }
   });
 
