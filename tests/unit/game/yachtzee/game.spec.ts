@@ -21,36 +21,6 @@ const generatePlayers =
     Array.from({ length: count }, (_, i) => new Player(`Tester ${ i + 1 }`, new Cup())) as NonEmptyArray<Player>
 ;
 
-/*
- console.log(game);
- console.log(game.getNowPlaying());
-
- game.on("after action", (player, action, args) => {
- console.log();
- console.log("=".repeat(action.length + 6));
- console.log(`== ${ action.toLocaleUpperCase() } ==`);
- console.log("=".repeat(action.length + 6));
- console.log("Player:", player.name);
- console.log("Args:", args);
- console.log("Dice:", player.cup.diceValues());
- console.log("Score:", player.scoreSheet.getScores());
- console.log("Used:", player.scoreSheet.getUsedScores());
- console.log();
- });
-
- await game.do("roll");
-
- await game.do("roll");
-
- await game.do("pick score", ScoreSection.upper, "Aces");
-
- await game.do("roll");
-
- await game.do("roll");
-
- console.log(game.getPlayers().map((p) => [ p.name, p.scoreSheet.getTotalScore() ]));
- */
-
 test.group("Yahtzee / Game", () => {
   test("throws error when no players are provided", ({ assert }) => {
     const players = [] as Player[];
